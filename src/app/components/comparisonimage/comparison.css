@@ -1,0 +1,53 @@
+.image-comparison{
+    position: relative;
+    width: 1024px;
+    height: 768px;
+    overflow: hidden;
+}
+
+.image-comparison img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: left;
+}
+
+.image-comparison .images-container{
+    position: absolute;
+    z-index: 10;
+}
+
+.image-comparison .images-container .before-image{
+    position: absolute;
+    top: 0px;
+    width: 50%;
+}
+
+.image-comparison .image-slider{
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 90;
+}
+
+.image-comparison .image-slider-line{
+    position: absolute;
+    height: 768px;
+    width: 4px;
+    background-color: rgba(207, 207, 207, 0.8);
+    left: 50%;
+    transform: translateX( -50% );
+    z-index: 80;
+}
+
+.image-comparison .image-slider-icon{
+    position: absolute;
+    left: 50%;
+    top: 80%;
+    width: 96px;
+    height: 34px;
+    color: white;
+    transform: translate( -50%, -50% );
+    z-index: 85;
+}

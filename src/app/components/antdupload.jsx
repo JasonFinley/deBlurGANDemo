@@ -6,19 +6,20 @@ import { message, Upload } from 'antd';
 
 const { Dragger } = Upload;
 
-const AntdUpload = () => {
+const AntdUpload = ({setUploadFile}) => {
 
   const props = {
     name: 'file',
+    size: 'large',
     accept: ".png,.jpg,.jpeg",
     multiple: false,
-    //action: 'https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload',
     onChange(info) {
       const { status } = info.file;
       if (status !== 'uploading') {
         console.log(info.file, info.fileList);
       }
       if (status === 'done') {
+        setUploadFile(info.file.originFileObj);
         message.success(`${info.file.name} file uploaded successfully.`);
       } else if (status === 'error') {
         message.error(`${info.file.name} file upload failed.`);

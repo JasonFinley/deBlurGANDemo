@@ -3,10 +3,13 @@
 import { Button } from "antd";
 import { useEffect, useState } from "react";
 
-const BTNPredict = ({imageFile, setIsLoading, setPredictURL }) => {
+const BTNPredict = ({imageFile, setIsFetching, setPredictURL }) => {
+
+    const [isDisabled, setIsDisabled] = useState( false ); 
     
     const postPredict = async ( file ) => {
-        setIsLoading(true);
+        setIsFetching(true);
+        setIsDisabled(true);
 
         const formData = new FormData();
         formData.append("file", file );
@@ -16,21 +19,33 @@ const BTNPredict = ({imageFile, setIsLoading, setPredictURL }) => {
         const url = URL.createObjectURL(blob);
         console.log(url);
         setPredictURL(url);
-        setIsLoading(false);
+        setIsFetching(false);
+        setIsDisabled(false);
         //return url
     }
 
     const handlePredict = () => {
-        postPredict( uploadedImageFile );
+        if( imageFile )
+            postPredict( imageFile );
     }
 
     useEffect( () => {
 
-        setIsLoading(false)
+        setIsFetching(false)
 
     }, [imageFile] );
 
-    return <Button onClick={ handlePredict }>CLEAR</Button>;
+    return <Button
+        style={{
+            width: "120px",
+            height: "44px",
+            fontSize: "20px"
+        }}
+        disabled={isDisabled} 
+        onClick={ handlePredict }
+    >
+        Deblur
+    </Button>;
 }
 
 export default BTNPredict;
