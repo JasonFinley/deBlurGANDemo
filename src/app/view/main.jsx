@@ -1,88 +1,108 @@
 "use client"
 
-import { useCallback, useMemo, useState } from "react";
-import AntdUpload from "../components/antdupload";
-import BTNPredict from "../components/btnpredict";
-import { Spin } from "antd";
-import ComparisonImage from "../components/comparisonimage";
-import BTNDownload from "../components/btndownload";
+import React, { useState } from 'react';
+import Image from "next/image";
+import { Layout, Menu, theme } from 'antd';
+import ViewDeMotion from './demotion';
+const { Header, Content, Footer, Sider } = Layout;
 
 const ViewMain = () => {
-    const [ isFetching, setIsFetching ] = useState( false );
-    const [ imageFile, setImageFile ] = useState( null );
-    const [ predictURL, setPredictURL ] = useState( null );
 
-    const getImageFileURL = useCallback( () => {
-        if( imageFile )
-            return URL.createObjectURL( imageFile );
-        return null;
-    }, [imageFile] );
+    const [selectedKey, setSelectedKey] = useState('1');
 
-    const getDeblurredImageURL = useCallback( () => {
+    const items = [{
+        key: '1',
+        label : '模糊去噪',
+    },{
+        key: '2',
+        label : '畫質修復',
+    },{
+        key: '3',
+        label : '圖像濾鏡',
+    }]
 
-        if( !predictURL ) return null;
 
-        return {
-            fileName: imageFile ? ( "deblurred_" + imageFile.name ): "deblurred_image.png",
-            predictURL: predictURL
-        }
+    const {
+        token: { colorBgContainer, borderRadiusLG },
+    } = theme.useToken();
 
-    }, [predictURL]);
+    const handleOnSelectMenu = (e) => {
+        console.log('click ', e.key);
+        setSelectedKey( e.key );
+    }
 
-    return <div>
-        <AntdUpload
-            setUploadFile={ setImageFile }
-        />
-        <div className="w-full flex justify-center my-4">
-            <BTNPredict
-                imageFile={ imageFile }
-                setIsFetching={ setIsFetching }
-                setPredictURL={ setPredictURL }
+    return (
+    <Layout hasSider>
+        <Sider
+            style={{
+                overflow: 'auto',
+                height: '100vh',
+                position: 'sticky',
+                insetInlineStart: 0,
+                top: 0,
+                bottom: 0,
+                scrollbarWidth: 'thin',
+                scrollbarGutter: 'stable',
+            }}
+        >
+            <div className='w-full h-32 bg-[#061830] flex justify-center items-center'>
+                <Image
+                    priority
+                    unoptimized 
+                    height={96} 
+                    width={128} 
+                    src={"/clearify_logo.png"} 
+                    alt="Clearify LOGO"
+                    style={{ 
+                        width: '100%', 
+                        height: 'auto', 
+                        objectFit: 'contain' 
+                    }}
+                />
+            </div>
+            <Menu 
+                theme="dark"
+                mode="inline"
+                defaultSelectedKeys={['1']} 
+                items={items}
+                style={{
+                    fontSize: "20px",
+                    textAlign: "center"
+                }}
+                onSelect={ handleOnSelectMenu }
             />
-            <div className="w-4"/>
-            <BTNDownload
-                fileName={ getDeblurredImageURL() ? getDeblurredImageURL().fileName : null }
-                predictURL={ getDeblurredImageURL() ? getDeblurredImageURL().predictURL : null }
-            />
-        </div>
-        <div className="w-full flex justify-center">
-            <div className="relative w-[1024px] h-[768px] bg-stone-800/50">
-                { imageFile && !predictURL &&
-                    <div className="relative w-full h-full flex justify-center items-center">
-                        <img 
-                            src={ URL.createObjectURL( imageFile ) } 
-                            alt="Uploaded" 
-                        />
-                    </div>
-                }
+        </Sider>
+        <Layout>
+            <Header style={{ padding: 0, background: colorBgContainer }} />
+            <Content style={{ margin: '24px 16px 0', overflow: 'initial' }}>
+            <div
+                style={{
+                    padding: 24,
+                    minHeight: 360,
+                    background: colorBgContainer,
+                    borderRadius: borderRadiusLG,
+                }}
+            >
                 {
-                    isFetching ? (
-                        <div className="absolute left-0 top-0 w-[1024px] h-[768px] bg-black/50 flex justify-center items-center">
-                            <Spin tip="Loading" size="large">
-                                <div style={{
-                                        padding: 50,
-                                        background: 'rgba(0, 0, 0, 0.05)',
-                                        borderRadius: 4,
-                                    }} 
-                                />
-                            </Spin>
+                    selectedKey === '1' ? (
+                        <div>
+                            <ViewDeMotion/>
                         </div>
-                    ) : predictURL && (
-                        <div className="absolute left-0 top-0 w-[1024px] h-[768px] bg-black/50 flex justify-center items-center">
-                            {/*<ComparisonImage
-                                imageA={ "https://picsum.photos/id/870/1024/768" }
-                                imageB={ "https://picsum.photos/id/870/1024/768?grayscale&blur=2" }
-                            />*/}
-                            <ComparisonImage
-                                imageA={ getImageFileURL() }
-                                imageB={ predictURL }
-                            />
-                        </div>
+                    ) : selectedKey === '2' ? ( 
+                        <div className='text-2xl'>畫質修復內容區 - Comming Soon</div>
+                    ) : selectedKey === '3' ? (
+                        <div className='text-2xl'>圖像濾鏡區 - Comming Soon</div>
+                    ) : (
+                        <div className='text-2xl'>Comming Soon</div>
                     )
                 }
             </div>
-        </div>
-    </div>;
+            </Content>
+            <Footer style={{ textAlign: 'center' }}>
+                Ant Design ©{new Date().getFullYear()} Created by Ant UED
+            </Footer>
+        </Layout>
+    </Layout>);
 }
 
 export default ViewMain;
