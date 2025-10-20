@@ -47,7 +47,7 @@ const ViewMain = () => {
         </div>
         <div className="w-full flex justify-center">
             <div className="relative w-[1024px] h-[768px] bg-stone-800/50">
-                { imageFile &&
+                { imageFile && !predictURL &&
                     <div className="relative w-full h-full flex justify-center items-center">
                         <img 
                             src={ URL.createObjectURL( imageFile ) } 
