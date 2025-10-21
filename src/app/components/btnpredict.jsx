@@ -36,13 +36,15 @@ const BTNPredict = ({imageFile, setIsFetching, setPredictURL }) => {
     }, [imageFile] );
 
     return <Button
-        style={{
-            width: "120px",
-            height: "44px",
-            fontSize: "20px"
-        }}
+        type="primary"
         disabled={isDisabled} 
         onClick={ handlePredict }
+        style={{
+            width: "120px",
+            height : "44px",
+            color: "#ffffff",
+            fontSize: "20px"
+        }}
     >
         Deblur
     </Button>;

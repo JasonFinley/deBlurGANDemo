@@ -21,11 +21,13 @@ const BTNDownload = ({ fileName, downloadURL}) => {
 
     return (
         <Button
+            type="primary"
             disabled={ !downloadURL }
             onClick={handleOnClick}
             style={{
                 width: "120px",
                 height: "44px",
+                color: "#ffffff",
                 fontSize: "20px"
             }}
         >

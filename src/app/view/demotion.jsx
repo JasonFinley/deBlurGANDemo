@@ -8,6 +8,7 @@ import ComparisonImage from "../components/comparisonimage";
 import BTNDownload from "../components/btndownload";
 
 const ViewDeMotion = () => {
+    
     const [ isFetching, setIsFetching ] = useState( false );
     const [ imageFile, setImageFile ] = useState( null );
     const [ predictURL, setPredictURL ] = useState( null );
@@ -46,7 +47,7 @@ const ViewDeMotion = () => {
             />
         </div>
         <div className="w-full flex justify-center">
-            <div className="relative w-[1024px] h-[768px] bg-stone-800/50">
+            <div className="relative w-[1024px] h-[768px] bg-gray-600/50">
                 { imageFile && !predictURL &&
                     <div className="relative w-full h-full flex justify-center items-center">
                         <img 

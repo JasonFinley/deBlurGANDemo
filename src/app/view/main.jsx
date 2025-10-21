@@ -19,12 +19,10 @@ const ViewMain = () => {
     },{
         key: '3',
         label : '圖像濾鏡',
+    },{
+        key: '4',
+        label : '圖片生成',
     }]
-
-
-    const {
-        token: { colorBgContainer, borderRadiusLG },
-    } = theme.useToken();
 
     const handleOnSelectMenu = (e) => {
         console.log('click ', e.key);
@@ -72,15 +70,17 @@ const ViewMain = () => {
                 onSelect={ handleOnSelectMenu }
             />
         </Sider>
-        <Layout>
-            <Header style={{ padding: 0, background: colorBgContainer }} />
+        <Layout
+            style={{background: "#424242ff"}}
+        >
+            <Header style={{ padding: 0, background: "#061830" }} />
             <Content style={{ margin: '24px 16px 0', overflow: 'initial' }}>
             <div
                 style={{
                     padding: 24,
                     minHeight: 360,
-                    background: colorBgContainer,
-                    borderRadius: borderRadiusLG,
+                    background: "#061830",
+                    borderRadius: 8,
                 }}
             >
                 {
@@ -89,17 +89,19 @@ const ViewMain = () => {
                             <ViewDeMotion/>
                         </div>
                     ) : selectedKey === '2' ? ( 
-                        <div className='text-2xl'>畫質修復內容區 - Comming Soon</div>
+                        <div className='text-2xl text-white'>畫質修復內容區 - Comming Soon</div>
                     ) : selectedKey === '3' ? (
-                        <div className='text-2xl'>圖像濾鏡區 - Comming Soon</div>
+                        <div className='text-2xl text-white'>圖像濾鏡區 - Comming Soon</div>
+                    ) : selectedKey === '4' ? (
+                        <div className='text-2xl text-white'>圖片AI生成 - Comming Soon</div>
                     ) : (
-                        <div className='text-2xl'>Comming Soon</div>
+                        <div className='text-2xl text-white'>Comming Soon</div>
                     )
                 }
             </div>
             </Content>
-            <Footer style={{ textAlign: 'center' }}>
-                Ant Design ©{new Date().getFullYear()} Created by Ant UED
+            <Footer style={{ textAlign: 'center', background: "#424242ff", color: "#ffffff" }}>
+                IT ©{new Date().getFullYear()} Created by AI Clearify Team
             </Footer>
         </Layout>
     </Layout>);
