@@ -1,0 +1,14 @@
+.ant-dropdown .ant-dropdown-menu{
+    background-color: #042fbe !important;
+}
+
+/* 只改這個 Dropdown */
+.custom-dropdown-menu .ant-dropdown-menu-item{
+  font-size: 24px !important;
+  color: white  !important;
+}
+
+.custom-dropdown-menu .ant-dropdown-menu-item .ant-dropdown-menu-item-active,
+.custom-dropdown-menu .ant-dropdown-menu-item:hover {
+  background-color: #7188d4 !important;
+}

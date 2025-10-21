@@ -2,13 +2,18 @@
 
 import React, { useState } from 'react';
 import Image from "next/image";
-import { Layout, Menu, theme } from 'antd';
-import ViewDeMotion from './demotion';
+import { Layout, Menu, Grid } from 'antd';
+import ViewDeblur from './deblur';
+import { Dropdown } from 'antd';
+import { MoreOutlined } from '@ant-design/icons';
+
 const { Header, Content, Footer, Sider } = Layout;
+const { useBreakpoint } = Grid;
 
 const ViewMain = () => {
 
     const [selectedKey, setSelectedKey] = useState('1');
+    const screens = useBreakpoint();
 
     const items = [{
         key: '1',
@@ -75,7 +80,38 @@ const ViewMain = () => {
         <Layout
             style={{background: "#424242ff"}}
         >
-            <Header style={{ padding: 0, background: "#061830" }} />
+            <Header style={{ padding: 0, background: "#061830" }}>
+                {   
+                    screens.xs && <div
+                        className='flex justify-between items-center'
+                    >
+                        <Image
+                            priority
+                            unoptimized 
+                            height={64} 
+                            width={128} 
+                            src={"/clearify_logo.png"} 
+                            alt="Clearify LOGO"
+                            style={{ 
+                                width: '128px', 
+                                height: '64px', 
+                                objectFit: 'contain' 
+                            }}
+                        />
+                        <Dropdown
+                            menu={ {
+                                items,
+                                className: 'custom-dropdown-menu',
+                                onClick: handleOnSelectMenu
+                            } }
+                            trigger={['click']}
+                            
+                        >
+                            <MoreOutlined style={{ fontSize: 36, color: '#ffffffe0', marginRight: "4px" }}/>
+                        </Dropdown>
+                    </div>
+                }
+            </Header>
             <Content style={{ margin: '24px 16px 0', overflow: 'initial' }}>
             <div
                 style={{
@@ -88,7 +124,7 @@ const ViewMain = () => {
                 {
                     selectedKey === '1' ? (
                         <div>
-                            <ViewDeMotion/>
+                            <ViewDeblur/>
                         </div>
                     ) : selectedKey === '2' ? ( 
                         <div className='text-2xl text-white'>畫質修復內容區 - Comming Soon</div>

@@ -1,13 +1,14 @@
 "use client"
 
 import { useCallback, useState } from "react";
-import AntdUpload from "../components/antdupload";
-import BTNPredict from "../components/btnpredict";
+import AntdUpload from "../../components/antdupload";
+import BTNPredict from "../../components/btnpredict";
 import { Spin } from "antd";
-import ComparisonImage from "../components/comparisonimage";
-import BTNDownload from "../components/btndownload";
+import ComparisonImage from "../../components/comparisonimage";
+import BTNDownload from "../../components/btndownload";
+import "./deblur.css";
 
-const ViewDeMotion = () => {
+const ViewDeblur = () => {
     
     const [ isFetching, setIsFetching ] = useState( false );
     const [ imageFile, setImageFile ] = useState( null );
@@ -86,4 +87,4 @@ const ViewDeMotion = () => {
     </div>;
 }
 
-export default ViewDeMotion;
+export default ViewDeblur;
