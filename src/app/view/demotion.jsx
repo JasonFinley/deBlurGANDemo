@@ -47,7 +47,7 @@ const ViewDeMotion = () => {
             />
         </div>
         <div className="w-full flex justify-center">
-            <div className="relative w-[1024px] h-[768px] bg-gray-600/50">
+            <div className="relative w-full max-w-[1024px] h-auto aspect-[4/3] bg-gray-600/50 mx-auto">
                 { imageFile && !predictURL &&
                     <div className="relative w-full h-full flex justify-center items-center">
                         <img 
@@ -58,7 +58,7 @@ const ViewDeMotion = () => {
                 }
                 {
                     isFetching ? (
-                        <div className="absolute left-0 top-0 w-[1024px] h-[768px] bg-black/50 flex justify-center items-center">
+                        <div className="absolute left-0 top-0 w-full max-w-[1024px] h-auto aspect-[4/3] bg-black/50 flex justify-center items-center">
                             <Spin tip="Loading" size="large">
                                 <div style={{
                                         padding: 50,
@@ -69,7 +69,7 @@ const ViewDeMotion = () => {
                             </Spin>
                         </div>
                     ) : predictURL && (
-                        <div className="absolute left-0 top-0 w-[1024px] h-[768px] bg-black/50 flex justify-center items-center">
+                        <div className="absolute left-0 top-0 w-full max-w-[1024px] h-auto aspect-[4/3] bg-black/50 flex justify-center items-center">
                             {/*<ComparisonImage
                                 imageA={ "https://picsum.photos/id/870/1024/768" }
                                 imageB={ "https://picsum.photos/id/870/1024/768?grayscale&blur=2" }

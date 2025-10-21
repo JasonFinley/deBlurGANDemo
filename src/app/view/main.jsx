@@ -42,6 +42,8 @@ const ViewMain = () => {
                 scrollbarWidth: 'thin',
                 scrollbarGutter: 'stable',
             }}
+            breakpoint='xs'
+            collapsedWidth={0}
         >
             <div className='w-full h-32 bg-[#061830] flex justify-center items-center'>
                 <Image

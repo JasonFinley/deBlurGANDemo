@@ -1,8 +1,40 @@
-.image-comparison{
-    position: relative;
-    width: 1024px;
-    height: 768px;
-    overflow: hidden;
+.image-comparison {
+  position: relative;
+  width: 100%;              /* 改為百分比自適應 */
+  max-width: 1024px;        /* 最大寬度 */
+  aspect-ratio: 4 / 3;      /* 維持 4:3 比例 */
+  overflow: hidden;
+  margin: 0 auto;           /* 置中 */
+  border-radius: 12px;
+}
+
+/* ✅ 大螢幕（桌機） */
+@media (min-width: 1200px) {
+  .image-comparison {
+    max-width: 1200px;
+  }
+}
+
+/* ✅ 中螢幕（筆電 / 平板橫向） */
+@media (max-width: 1199px) and (min-width: 768px) {
+  .image-comparison {
+    max-width: 900px;
+  }
+}
+
+/* ✅ 小螢幕（平板直向） */
+@media (max-width: 767px) and (min-width: 480px) {
+  .image-comparison {
+    max-width: 640px;
+  }
+}
+
+/* ✅ 手機（直向） */
+@media (max-width: 479px) {
+  .image-comparison {
+    max-width: 100%;
+    aspect-ratio: 3 / 2; /* 可略為調整比例讓畫面更滿 */
+  }
 }
 
 .image-comparison img{
@@ -35,7 +67,7 @@
 
 .image-comparison .image-slider-line{
     position: absolute;
-    height: 768px;
+    height: 100%;
     width: 4px;
     background-color: rgba(207, 207, 207, 0.8);
     left: 50%;
