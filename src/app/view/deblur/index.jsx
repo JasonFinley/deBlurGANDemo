@@ -35,11 +35,6 @@ const ViewDeblur = () => {
         // name: "random_image",
     } );
 
-    // useEffect( () => {
-    //     console.log("predictObj changed ", predictObj );
-    // }, [predictObj] )
-
-
     return <div>
         <AntdUpload
             setUploadFileObj={ setUploadFileObj }
@@ -53,7 +48,7 @@ const ViewDeblur = () => {
             <div className="w-4"/>
             <BTNDownload
                 fileName={ predictObj.name }
-                predictURL={ predictObj.url }
+                downloadURL={ predictObj.url }
             />
         </div>
         <div className="w-full flex justify-center">

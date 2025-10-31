@@ -8,7 +8,7 @@ const BTNDownload = ({ fileName, downloadURL}) => {
 
         if( !downloadURL ) return;
 
-        const file_name = !fileName ? "deblurred_image.png" : fileName;
+        const file_name = !fileName ? "deblurred_image.jpg" : `${fileName}_deblurred.jpg`;
 
         const link = document.createElement('a');
         link.href = downloadURL;
