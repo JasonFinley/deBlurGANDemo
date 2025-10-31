@@ -11,49 +11,51 @@ import "./deblur.css";
 const ViewDeblur = () => {
     
     const [ isFetching, setIsFetching ] = useState( false );
-    const [ imageFile, setImageFile ] = useState( null );
-    const [ predictURL, setPredictURL ] = useState( null );
+    const [ predictObj, setPredictObj ] = useState({
+        url: null,
+        name: null,
+        width: null,
+        height: null,
+        created_at: null,
+    });
+    const [ upLoadFileObj, setUploadFileObj ] = useState( {
+        created_at: null,
+        asset_id: null,
+        format: null,
+        public_id: null,
+        version: null,
+        url: "https://picsum.photos/3000/4000",
+        width: 3000,
+        height: 4000,
+        name: "random.jpg",
+    } );
 
-    const getImageFileURL = useCallback( () => {
-        if( imageFile )
-            return URL.createObjectURL( imageFile );
-        return null;
-    }, [imageFile] );
-
-    const getDeblurredImageURL = useCallback( () => {
-
-        if( !predictURL ) return null;
-
-        return {
-            fileName: imageFile ? ( "deblurred_" + imageFile.name ): "deblurred_image.png",
-            predictURL: predictURL
-        }
-
-    }, [predictURL]);
 
     return <div>
         <AntdUpload
-            setUploadFile={ setImageFile }
+            setUploadFileObj={ setUploadFileObj }
         />
         <div className="w-full flex justify-center my-4">
             <BTNPredict
-                imageFile={ imageFile }
+                imageFileObj={ upLoadFileObj }
                 setIsFetching={ setIsFetching }
-                setPredictURL={ setPredictURL }
+                setPredictObj={ setPredictObj }
             />
             <div className="w-4"/>
             <BTNDownload
-                fileName={ getDeblurredImageURL() ? getDeblurredImageURL().fileName : null }
-                predictURL={ getDeblurredImageURL() ? getDeblurredImageURL().predictURL : null }
+                fileName={ predictObj.name }
+                predictURL={ predictObj.url }
             />
         </div>
         <div className="w-full flex justify-center">
             <div className="relative w-full max-w-[1024px] h-auto aspect-[4/3] bg-gray-600/50 mx-auto">
-                { imageFile && !predictURL &&
+                { upLoadFileObj.url && !predictObj.url &&
                     <div className="relative w-full h-full flex justify-center items-center">
-                        <img 
-                            src={ URL.createObjectURL( imageFile ) } 
-                            alt="Uploaded" 
+                        <img
+                            loading="lazy"
+                            src={ upLoadFileObj.url } 
+                            alt="Uploaded"
+                            className="object-cover w-full h-full"
                         />
                     </div>
                 }
@@ -69,15 +71,15 @@ const ViewDeblur = () => {
                                 />
                             </Spin>
                         </div>
-                    ) : predictURL && (
+                    ) : predictObj.url && (
                         <div className="absolute left-0 top-0 w-full max-w-[1024px] h-auto aspect-[4/3] bg-black/50 flex justify-center items-center">
                             {/*<ComparisonImage
                                 imageA={ "https://picsum.photos/id/870/1024/768" }
                                 imageB={ "https://picsum.photos/id/870/1024/768?grayscale&blur=2" }
                             />*/}
                             <ComparisonImage
-                                imageA={ getImageFileURL() }
-                                imageB={ predictURL }
+                                imageA={ upLoadFileObj.url }
+                                imageB={ predictObj.url }
                             />
                         </div>
                     )
