@@ -23,6 +23,7 @@ const BTNPredict = ({imageFileObj, setIsFetching, setPredictObj }) => {
             name: response.original_filename,
         }
         */
+        console.log("posting predict for ", fileObj );
         const formData = new FormData();
         formData.append("file_name", fileObj.name );
         formData.append("file_format", fileObj.format );
@@ -34,10 +35,17 @@ const BTNPredict = ({imageFileObj, setIsFetching, setPredictObj }) => {
         const res = await fetch("https://aidemoproject-deblurganv2demo.hf.space/predict", { method: "POST", body: formData });
         const jsonRes = await res.json();
         console.log(jsonRes);
-        setPredictObj(jsonRes);
+        if(jsonRes.status === "success" ){
+            setPredictObj({
+                url: jsonRes.file_url,
+                name: jsonRes.file_name,
+                width: jsonRes.file_width,
+                height: jsonRes.file_height,
+                created_at: jsonRes.file_created_at,
+            })
+        }
         setIsFetching(false);
         setIsDisabled(false);
-        //return url
     }
 
     const handlePredict = () => {

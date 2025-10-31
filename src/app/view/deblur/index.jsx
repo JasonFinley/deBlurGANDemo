@@ -1,6 +1,6 @@
 "use client"
 
-import { useCallback, useState } from "react";
+import { useEffect, useState } from "react";
 import AntdUpload from "../../components/antdupload";
 import BTNPredict from "../../components/btnpredict";
 import { Spin } from "antd";
@@ -21,14 +21,23 @@ const ViewDeblur = () => {
     const [ upLoadFileObj, setUploadFileObj ] = useState( {
         created_at: null,
         asset_id: null,
-        format: null,
         public_id: null,
         version: null,
-        url: "https://picsum.photos/3000/4000",
-        width: 3000,
-        height: 4000,
-        name: "random.jpg",
+        format: null,
+        url: null,
+        width: null,
+        height: null,
+        name: null,
+        // format: "jpg",
+        // url: "https://picsum.photos/id/1/1280/720",
+        // width: 1280,
+        // height: 720,
+        // name: "random_image",
     } );
+
+    // useEffect( () => {
+    //     console.log("predictObj changed ", predictObj );
+    // }, [predictObj] )
 
 
     return <div>
